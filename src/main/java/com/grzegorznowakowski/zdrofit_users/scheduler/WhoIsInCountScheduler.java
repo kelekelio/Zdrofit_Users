@@ -24,7 +24,7 @@ public class WhoIsInCountScheduler {
             log.info("Downloading current number of members in each club at {}", LocalDateTime.now());
 
             long startTime = System.nanoTime();
-
+            whoIsInCountService.logZdrofitMembers();
             long importTimeInMs = (System.nanoTime() - startTime) / 1000000;
             log.info("Download done after: {} ms", importTimeInMs);
         } else {
