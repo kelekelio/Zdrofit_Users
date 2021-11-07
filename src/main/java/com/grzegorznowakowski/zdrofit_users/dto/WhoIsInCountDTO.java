@@ -9,13 +9,13 @@ import lombok.NoArgsConstructor;
 @Getter
 @Builder
 @NoArgsConstructor
-public class WhoIsInCountList {
+public class WhoIsInCountDTO {
 
     private Integer count;
     private Long clubId;
 
-    public WhoIsInCountList(@JsonProperty("count") Integer count,
-                            @JsonProperty("clubId") Long clubId) {
+    public WhoIsInCountDTO(@JsonProperty("count") Integer count,
+                           @JsonProperty("clubId") Long clubId) {
         this.count = count;
         this.clubId = clubId;
     }

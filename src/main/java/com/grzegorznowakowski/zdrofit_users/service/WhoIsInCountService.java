@@ -1,6 +1,7 @@
 package com.grzegorznowakowski.zdrofit_users.service;
 
 import com.grzegorznowakowski.zdrofit_users.config.ZdrofitAPI;
+import com.grzegorznowakowski.zdrofit_users.dto.WhoIsInCountDTO;
 import com.grzegorznowakowski.zdrofit_users.dto.WhoIsInCountResponse;
 import com.grzegorznowakowski.zdrofit_users.entity.WhoIsInCount;
 import com.grzegorznowakowski.zdrofit_users.repository.WhoIsInCountRepository;
@@ -16,7 +17,9 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @Service
@@ -45,13 +48,31 @@ public class WhoIsInCountService {
 
         ResponseEntity<WhoIsInCountResponse> response = restTemplate.exchange(uri.toString(),
                 HttpMethod.GET,
-                new HttpEntity<Object>(headers),
+                entity,
                 WhoIsInCountResponse.class);
 
+        validateError(response);
+        saveWhoIsInCount(response);
+    }
 
+    private void validateError(ResponseEntity<?> response) {
+        if (response.getStatusCode().isError()) {
+            throw new RuntimeException("API returned an error: " + response.getStatusCode());
+        }
+    }
 
+    private void saveWhoIsInCount(ResponseEntity<WhoIsInCountResponse> response) {
+        LocalDateTime time = LocalDateTime.now();
+        Objects.requireNonNull(response.getBody()).getData().forEach(whoIsInCount -> logWhoIsIn(time, whoIsInCount));
+    }
 
+    private void logWhoIsIn(LocalDateTime time, WhoIsInCountDTO whoIsInCount) {
+        WhoIsInCount logWhoIsIn = WhoIsInCount.builder()
+                .clubId(whoIsInCount.getClubId())
+                .count(whoIsInCount.getCount())
+                .date(time)
+                .build();
 
-
+        whoIsInCountRepository.save(logWhoIsIn);
     }
 }

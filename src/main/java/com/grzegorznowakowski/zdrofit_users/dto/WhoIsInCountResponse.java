@@ -13,10 +13,10 @@ import java.util.List;
 public class WhoIsInCountResponse {
 
     private String errors;
-    private List<WhoIsInCountList> data;
+    private List<WhoIsInCountDTO> data;
 
     public WhoIsInCountResponse(@JsonProperty("errors") String errors,
-                                @JsonProperty("data") List<WhoIsInCountList> data) {
+                                @JsonProperty("data") List<WhoIsInCountDTO> data) {
         this.errors = errors;
         this.data = data;
     }
