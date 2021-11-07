@@ -2,9 +2,10 @@ package com.grzegorznowakowski.zdrofit_users;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class ZdrofitUsersApplication {
+public class ZdrofitUsersApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         SpringApplication.run(ZdrofitUsersApplication.class, args);

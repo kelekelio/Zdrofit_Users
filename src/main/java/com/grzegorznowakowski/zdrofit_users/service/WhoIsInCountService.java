@@ -44,7 +44,7 @@ public class WhoIsInCountService {
                 .path(WHO_IS_IN_COUNT_URL)
                 .build().encode();
 
-        HttpEntity<?> entity = new HttpEntity<Object>(headers);
+        HttpEntity<?> entity = new HttpEntity<>(headers);
 
         ResponseEntity<WhoIsInCountResponse> response = restTemplate.exchange(uri.toString(),
                 HttpMethod.GET,
@@ -72,6 +72,7 @@ public class WhoIsInCountService {
                 .count(whoIsInCount.getCount())
                 .date(time)
                 .build();
+        System.out.println(logWhoIsIn.getClubId() + " => " + whoIsInCount.getCount());
 
         whoIsInCountRepository.save(logWhoIsIn);
     }

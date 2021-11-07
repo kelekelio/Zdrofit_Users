@@ -13,6 +13,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>Zdrofit_Users</name>
     <description>Zdrofit_Users</description>
+    <packaging>war</packaging>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -76,9 +77,15 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
+        <finalName>${artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
