@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "schedule.download-who-is-in-count.cron",
+      "type": "java.lang.String",
+      "description": "Description for schedule.download-who-is-in-count.cron."
+  }
+] }
